@@ -1,3 +1,4 @@
+let taskIDCounter = 0;
 let formEl = document.querySelector("#task-form");
 let tasksToDoEl = document.querySelector("#tasks-to-do");
 
@@ -26,6 +27,10 @@ let createTaskEl = function (taskDataObj) {
     // create list item
     let listItemEl = document.createElement("li");
     listItemEl.className = "task-item";
+
+    // add task id as a custom attribute
+    listItemEl.setAttribute("data-task-id", taskIDCounter);
+    taskIDCounter++;
 
     // create div to hold task info and add to list item
     let taskInfoEl = document.createElement("div");
