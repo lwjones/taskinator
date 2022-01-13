@@ -42,4 +42,27 @@ let createTaskEl = function (taskDataObj) {
     tasksToDoEl.appendChild(listItemEl);
 }
 
+let createTaskActions = function (taskId) {
+    let actionContainerEl = document.createElement("div");
+    actionContainerEl.className = "task-actions";
+
+    // edit button
+    let editButtonEl = document.createElement("button");
+    editButtonEl.textContent = "Edit";
+    editButtonEl.className = "btn edit-btn";
+    editButtonEl.setAttribute("data-task-id", taskId);
+
+    actionContainerEl.appendChild(editButtonEl);
+
+    // delete button
+    let deleteButtonEl = document.createElement("button");
+    deleteButtonEl.textContent = "Delete";
+    deleteButtonEl.className = "btn delete-btn";
+    deleteButtonEl.setAttribute("data-task-id", taskId);
+
+    actionContainerEl.appendChild(deleteButtonEl);
+
+    return actionContainerEl;
+};
+
 formEl.addEventListener("submit", taskFormHandler);
