@@ -30,7 +30,6 @@ let createTaskEl = function (taskDataObj) {
 
     // add task id as a custom attribute
     listItemEl.setAttribute("data-task-id", taskIDCounter);
-    taskIDCounter++;
 
     // create div to hold task info and add to list item
     let taskInfoEl = document.createElement("div");
@@ -39,7 +38,10 @@ let createTaskEl = function (taskDataObj) {
     listItemEl.appendChild(taskInfoEl);
 
     // add task to list
+    let taskActionsEl = createTaskActions(taskIDCounter);
+    listItemEl.appendChild(taskActionsEl);
     tasksToDoEl.appendChild(listItemEl);
+    taskIDCounter++;
 }
 
 let createTaskActions = function (taskId) {
@@ -61,6 +63,23 @@ let createTaskActions = function (taskId) {
     deleteButtonEl.setAttribute("data-task-id", taskId);
 
     actionContainerEl.appendChild(deleteButtonEl);
+
+    // status selector
+    let statusSelectEl = document.createElement("select");
+    statusSelectEl.className = "select-status";
+    statusSelectEl.setAttribute("name", "status-change");
+    statusSelectEl.setAttribute("data-task-id", taskId);
+
+    let statusChoices = ["To Do", "In Progress", "Completed"];
+
+    for (let i = 0; i < statusChoices.length; i++) {
+        let statusOptionEl = document.createElement("option");
+        statusOptionEl.textContent = statusChoices[i];
+        statusOptionEl.setAttribute("value", statusChoices[i]);
+        statusSelectEl.appendChild(statusOptionEl);
+    }
+
+    actionContainerEl.appendChild(statusSelectEl);
 
     return actionContainerEl;
 };
